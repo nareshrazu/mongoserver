@@ -4,7 +4,7 @@ let mongoU = 'mongodb+srv://naresh:raju1998@cluster0.xr9q3.mongodb.net/mydb?retr
 let mongodb = require('mongodb');
 let MongoClient = mongodb.MongoClient;
 let db;
-let port = 8979;
+let port = process.env.PORT || 8979;
 
 app.get('/',(req,res)=>{
     db.collection('city').find({}).toArray((err,rst)=>{
