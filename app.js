@@ -1,10 +1,11 @@
 let express = require('express');
 let app = express();
-let mongoU = 'mongodb+srv://naresh:raju1998@cluster0.xr9q3.mongodb.net/mydb?retryWrites=true&w=majority';
-let mongodb = require('mongodb');
-let MongoClient = mongodb.MongoClient;
-let db;
+let mongoD = require('mongodb');
+let mongoC = mongoD.MongoClient;
+let mongoU ='mongodb+srv://naresh:raju1998@cluster0.xr9q3.mongodb.net/mydb?retryWrites=true&w=majority'
 let port = process.env.PORT;
+let db;
+
 
 app.get('/',(req,res)=>{
     db.collection('city').find({}).toArray((err,rst)=>{
@@ -13,13 +14,10 @@ app.get('/',(req,res)=>{
     })
 })
 
-
-
-MongoClient.connect(mongoU,(err,connectfromurl)=>{
+mongoC.connect(mongoU,(err,con)=>{
     if(err) throw err;
-    db = connectfromurl.db('mydb');
+    db = con.db('mydb');
     app.listen(port, (err)=>{
         if(err) throw err;
     })
-        
-})
+});
