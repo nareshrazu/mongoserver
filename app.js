@@ -5,10 +5,11 @@ let mongoC = mongoD.MongoClient;
 let mongoU ='mongodb+srv://naresh:raju1998@cluster0.xr9q3.mongodb.net/mydb?retryWrites=true&w=majority'
 let port = process.env.PORT;
 let db;
-let cors = require('cors');
-app.use(cors({
-  origin: 'https://nareshrazu.herokuapp.com/'
-}));
+var bodParser = require('body-parser');
+var cors = require('cors');
+app.use(cors());
+app.use(bodParser.urlencoded({extended:true}));
+app.use(bodParser.json())
 
 
 app.get('/',(req,res)=>{
