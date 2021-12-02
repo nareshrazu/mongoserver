@@ -6,11 +6,12 @@ let mongoU ='mongodb+srv://naresh:raju1998@cluster0.xr9q3.mongodb.net/mydb?retry
 let port = process.env.PORT;
 let db;
 let cors = require('cors');
-
 app.use(cors({
   origin: 'https://nareshrazu.herokuapp.com/'
 }));
 
+cors.setHeader('Access-Control-Allow-Origin', '*');
+cors.setHeader('Access-Control-Allow-Header', 'Origin,X-Requested-With');
 
 
 app.get('/',(req,res)=>{
