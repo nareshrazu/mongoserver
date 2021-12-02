@@ -5,10 +5,6 @@ let mongoC = mongoD.MongoClient;
 let mongoU ='mongodb+srv://naresh:raju1998@cluster0.xr9q3.mongodb.net/mydb?retryWrites=true&w=majority'
 let port = process.env.PORT;
 let db;
-const express = require("express");
-
-const app = express();
-const port = process.env.SERVER_PORT || 8000;
 
 // Add Access Control Allow Origin headers
 app.use((req, res, next) => {
