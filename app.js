@@ -1,28 +1,48 @@
-let express = require('express');
-let app = express();
-let mongoD = require('mongodb');
-let mongoC = mongoD.MongoClient;
-let mongoU ='mongodb+srv://naresh:raju1998@cluster0.xr9q3.mongodb.net/mydb?retryWrites=true&w=majority'
-let port = process.env.PORT;
-let db;
-var bodParser = require('body-parser');
-var cors = require('cors');
-app.use(cors());
-app.use(bodParser.urlencoded({extended:true}));
-app.use(bodParser.json())
+import React,{Component} from 'react';
+const url = 'https://nareshrazu.herokuapp.com';
 
+class resto extends Component{
+    constructor(){
+        super();
+        console.log("Constructor Running");
+        this.state={
+            loc:'',
+        }
+    }
+    componentDidMount(){
+        fetch(url,{Method:'GET'})
+        .then((res) =>  res.json())
+        .then((data) => {this.setState({location:data})})
+    }
+    
+    render(){
+        console.log("Render() running");
+        console.log(this.state.loc);
+        return(
+            <React.Fragment>
+                <h3>Restauretn Deata Apperes Here</h3>
+                <select>
+                    <option>Select an option</option>
+                    <option>{this.renderCity(this.state.loc)}</option>
+                </select>
+            </React.Fragment>
+        )
+    }
+    renderCity = (data) => {
+        if(data){
+            return data.map((item) => {
+                return(
+                    <select>
+                        <option>----SELECT CITY---------</option>
+                        {this.renderCity(this.state.loc)}
+                    </select>
+                )
+            })
+        }
 
-app.get('/',(req,res)=>{
-    db.collection('city').find({}).toArray((err,rst)=>{
-        if(err) throw err;
-        res.send(rst);
-    })
-})
+        else console.log("Not able to fetch data");
+    }
+    
+}
 
-mongoC.connect(mongoU,(err,con)=>{
-    if(err) throw err;
-    db = con.db('mydb');
-    app.listen(port, (err)=>{
-        if(err) throw err;
-    })
-});
+export default resto;
