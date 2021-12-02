@@ -5,16 +5,12 @@ let mongoC = mongoD.MongoClient;
 let mongoU ='mongodb+srv://naresh:raju1998@cluster0.xr9q3.mongodb.net/mydb?retryWrites=true&w=majority'
 let port = process.env.PORT;
 let db;
+let cors = require('cors');
 
-// Add Access Control Allow Origin headers
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+app.use(cors({
+  origin: 'http://localhost:3000/'
+}));
+
 
 
 app.get('/',(req,res)=>{
