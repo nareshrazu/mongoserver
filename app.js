@@ -10,9 +10,6 @@ app.use(cors({
   origin: 'https://nareshrazu.herokuapp.com/'
 }));
 
-cors.setHeader('Access-Control-Allow-Origin', '*');
-cors.setHeader('Access-Control-Allow-Header', 'Origin,X-Requested-With');
-
 
 app.get('/',(req,res)=>{
     db.collection('city').find({}).toArray((err,rst)=>{
